@@ -28,7 +28,12 @@ $ ./a.out
 %}
 
 /* Definições de Nomes */
-IDENTIFICADOR   [_a-zA-Z][_a-zA-Z0-9]*  
+STRING	["]([ _a-zA-Z0-9\-]+)["]
+RELACIONAL ">"|"<"|">="|"<="|"=="|"!="
+RESERVADA "int"|"float"
+IDENTIFICADOR   [_a-zA-Z][_a-zA-Z0-9]*
+NUMERO [0-9]+
+MATEMATICO "+"|"*"|"-"
 
 /* FIM DA SEÇÃO DE DEFINIÇÕES */
 
@@ -39,11 +44,12 @@ IDENTIFICADOR   [_a-zA-Z][_a-zA-Z0-9]*
         padrão  ação
 
     */
-[0-9]+              {printf("<number, %s>", yytext);}
->|<|>=|<=|==|!=     {printf("<op_rel, %s>", yytext);}                                      
-int|float           {printf("<plavra_reservada, %s>", yytext); contador++;}
+{STRING}            {printf("<string, %s>", yytext);}
+{RELACIONAL}        {printf("<operador_relacional, %s>", yytext);} 
+{RESERVADA}         {printf("<palavra_reservada, %s>", yytext); contador++;}
 {IDENTIFICADOR}     {printf("<identificador, %s>", yytext); contador++;}
-\+                   {printf("<soma,>"); contador++;}
+{NUMERO}            {printf("<numero, %s>", yytext);}
+{MATEMATICO}        {printf("<operador_matematico, %s", yytext); contador++;}
 <<EOF>>             return 0;
     
 %%
