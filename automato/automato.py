@@ -33,8 +33,12 @@ def token(lexema):
         return '<numero, ' + lexema + '>'
     elif (lexema == '<'):
         return '<menor, >'
+    elif (lexema == '<='):
+        return '<menor_igual, >'
     elif (lexema == '>'):
         return '<maior, >'
+    elif (lexema == '>='):
+        return '<maior_igual, >'
     elif (lexema == '='):
         return '<igualdade, >'
     elif (lexema == '&&'):

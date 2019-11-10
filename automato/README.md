@@ -31,8 +31,8 @@ A atividade foi desenvolvida em Python, pela familiaridade com a mesma.
 ## Executando
 
 Para executar, basta fazer o download do *automato.py* e executar o seguinte comando:
-**$ python3 automato.py**
-<p>Em seguida, basta digitar a expressão desejada.
+`$ python3 automato.py`
+<p>Em seguida, basta digitar a expressão desejada.</p>
 
 ## Conclusão
 
@@ -44,4 +44,4 @@ Exemplo: a+b
 ```
 Saída: <identificador,a+b>
 ```
-<p>Portanto, para que seja feita a identificação correta dos tokens, a entrada deve ser: a + b </p>
+<p>Portanto, para que seja feita a identificação correta dos tokens, a entrada deve ser: `a + b` </p>
