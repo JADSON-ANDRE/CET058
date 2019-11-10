@@ -16,25 +16,27 @@ Os tokens devem são exibidos no formato `<nome_do_token, lexema>`, exemplo:
 <identificador, b>
 ```
 
-### Componentes
+## Componentes
 
 | Nome                | Matrícula      |
 | :------------------ | -------------: |
-| Eglom Sostenes      | 201511456      |
+| Eglom Sóstenes      | 201511456      |
 | Jadson André        | 201310457      |
 
-### Metodologia
+## Metodologia
 
-O exercício foi desenvolvido na linguagem Python, pela familiaridade com a mesma. O programa recebe a expressão do usuário e faz a identificação de tokens.
+A atividade foi desenvolvida em Python, pela familiaridade com a mesma.
+<p>O programa recebe a expressão do usuário ( via teclado) e faz a identificação dos mais variados tokens.</p>
 
-### Executando
+## Executando
 
 Para executar, basta fazer o download do *automato.py* e executar o seguinte comando:
 **$ python3 automato.py**
+<p>Em seguida, basta digitar a expressão desejada.
 
-### Conclusão
+## Conclusão
 
-Um dificuldade encontrada foi o tratamento do 'espaço', desta forma, a expressão precisar ter um 'espaço' após cada símbolo ou a mesma será identificada de acordo com o primeiro símbolo da expressão.
+Um dificuldade encontrada foi o tratamento do 'espaço', desta forma, ao digitar a expressão, a mesma precisa ter um 'espaço' após cada símbolo ou a mesma será identificada de acordo com o primeiro símbolo da expressão.
 ```
 Exemplo: a+b
 ```
@@ -42,3 +44,4 @@ Exemplo: a+b
 ```
 Saída: <identificador,a+b>
 ```
+<p>Portanto, para que seja feita a identificação correta dos tokens, a entrada deve ser: **$ a + b**</p>
