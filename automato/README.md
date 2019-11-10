@@ -1,5 +1,21 @@
 # Projeto - Parte 1
 
+Automato que reconhece os tokens referentes a uma expressão matemática do tipo:
+
+```
+a + b - c
+a * c - a
+a - b * c
+```
+
+Os tokens devem são exibidos no formato `<nome_do_token, lexema>`, exemplo:
+
+```
+<soma,>
+<identificador, a>
+<identificador, b>
+```
+
 ### Componentes
 
 | Nome                | Matrícula      |
@@ -13,7 +29,7 @@ O exercício foi desenvolvido na linguagem Python, pela familiaridade com a mesm
 
 ### Executando
 
-Para executar, basta fazer o download do *automato.p* e executar o seguinte comando:
+Para executar, basta fazer o download do *automato.py* e executar o seguinte comando:
 **$ python3 automato.py**
 
 ### Conclusão
