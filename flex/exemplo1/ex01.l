@@ -33,7 +33,7 @@ RELACIONAL ">"|"<"|">="|"<="|"=="|"!="
 RESERVADA "int"|"float"
 IDENTIFICADOR   [_a-zA-Z][_a-zA-Z0-9]*
 NUMERO [0-9]+
-MATEMATICO "+"|"*"|"-"
+MATEMATICO "+"|"*"|"-"|"/"
 
 /* FIM DA SEÇÃO DE DEFINIÇÕES */
 
