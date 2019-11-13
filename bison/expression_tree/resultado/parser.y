@@ -39,12 +39,12 @@ termo: fator
  | termo ADD fator { 
         char str[STR_SIZE];
         snprintf(str, STR_SIZE, "[ADD %s %s]", $1, $3);
-        strncpy($$, str, STR_SIZE);
+        strncpy($$, str, STR_SIZE)
     }
  | termo SUB fator {
         char str[STR_SIZE];
         snprintf(str, STR_SIZE, "[SUB %s %s]", $1, $3);
-        strncpy($$, str, STR_SIZE);
+        strncpy($$, str, STR_SIZE)
     }
  ;
 
@@ -52,19 +52,19 @@ fator: const
  | fator MUL const {
         char str[STR_SIZE];
         snprintf(str, STR_SIZE, "[MUL %s %s]", $1, $3);
-        strncpy($$, str, STR_SIZE);
+        strncpy($$, str, STR_SIZE)
    }
  | fator DIV const { 
         char str[STR_SIZE]; 
         snprintf(str, STR_SIZE, "[DIV %s %s]", $1, $3);
-        strncpy($$, str, STR_SIZE);
+        strncpy($$, str, STR_SIZE)
    }
  ;
 
 const: NUM {
         char str[STR_SIZE];
         snprintf(str, STR_SIZE, "[%s]", $1); 
-        strncpy($$, str, STR_SIZE);
+        strncpy($$, str, STR_SIZE)
     } 
  ;
 %%

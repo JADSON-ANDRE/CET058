@@ -75,15 +75,8 @@ termo: NUM { }
  * C gerado.
  */
 
-No* allocar_no(int num_filhos) {
-    No* no = (No*) malloc(sizeof(no));
-    if (num_filhos > 0) {
-	no->filhos = (No**) malloc(sizeof(No*)*num_filhos);
-    }
-    else {
-	no->filhos = NULL;
-    }
-    return no;
+No* allocar_no() {
+    return (No*) malloc(sizeof(No));
 }
 
 void liberar_no(void* no) {
