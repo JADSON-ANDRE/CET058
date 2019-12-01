@@ -1,36 +1,56 @@
-# Eglom Sóstenes e Jadson André
+# Jadson André
 # Automato
 
 def token(lexema):
-    if (lexema == '('):
-        return '<parêntese_abertura, >'
-    elif (lexema == ')'):
-        return '<parêntese_fechamento, >'
-    elif (lexema == '['):
-        return '<colchete_abertura, >'
-    elif (lexema == ']'):
-        return '<colchete_fechamento, >'
-    elif (lexema == '^'):
-        return '<exponenciação, >'
-    elif (lexema == '+'):
-        return '<soma, >'
-    elif (lexema == '-'):
-        return '<subtração, >'
-    elif (lexema == '*'):
-        return '<multiplicação, >'
-    elif (lexema == '/'):
-        return '<divisão, >'
-    elif (str.isalpha(lexema[0])):
-        return '<identificador, ' + lexema + '>'
-    elif (lexema == '\0'):
-        return '<EOL,>'
-    else:
-        return '<NÃO-IDENTIFICADO>'
+	for i in range(0, len(lexema)):
+		if(lexema[i].isalpha() == True):
+			token = ("<Identificador, "+str(lexema[i]))
+		else:
+			if(lexema[i].isalpha() == True ):
+				token = token+str(lexema[i])
+			else:
+				if(str(lexema[i]) == "+"):
+					token = token+str(">")
+					print("\n"+str(token))
+					token = ' '
+					token = ("<soma, >")
+					print(""+str(token))
+					token = ' '
+				elif(lexema[i] == '-'):
+					token = token+str(">")
+					print("\n"+str(token))
+					token = ' '
+					token = ("<subtração, >")
+					print(""+str(token))
+					token = ' '
+				elif(lexema[i] == '*'):
+					token = token+str(">")
+					print("\n"+str(token))
+					token = ' '
+					token = ("<multiplicação, >")
+					print(""+str(token))
+					token = ' '
+				elif(lexema[i] == '/'):
+					token = token+str(">")
+					print("\n"+str(token))
+					token = ' '
+					token = ("<divisão, >")
+					print(""+str(token))
+					token = ' '
+				elif(token != ' '):
+					token = token+str(">")
+					print("\n"+str(token))
+					token = ' '
+					token = token+str(">")
+					print(""+str(token))
+				elif (lexema == '\0'):
+		        		return '<EOL,>'
+				else:
+				        return '<NÃO-IDENTIFICADO>'
 
-entrada = input('Expressão: ')
+entrada = input('Digite a expressão: ')
 while (entrada != '0'):
-    for expr in entrada.split():
-        parte = token(expr)
-        print(parte, end = '\n')
-    entrada = input('\nExpressão ou finalize com 0: ')
-
+	for lex in entrada.split():
+		parte = token(lex)
+		print(parte, end = '\n')
+	entrada = input('\nNova expressão ou finalize com 0: ')

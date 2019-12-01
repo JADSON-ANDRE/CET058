@@ -16,17 +16,16 @@ Os tokens devem são exibidos no formato `<nome_do_token, lexema>`, exemplo:
 <identificador, b>
 ```
 
-## Componentes
+## Componente
 
 | Nome                | Matrícula      |
 | :------------------ | -------------: |
-| Eglom Sóstenes      | 201511456      |
 | Jadson André        | 201310457      |
 
 ## Metodologia
 
 A atividade foi desenvolvida em Python, pela familiaridade com a mesma.
-<p>O programa recebe a expressão do usuário ( via teclado) e faz a identificação dos mais variados tokens.</p>
+<p>O programa recebe a expressão do usuário ( via teclado) e faz a identificação dos tokens.</p>
 
 ## Executando
 
@@ -36,12 +35,23 @@ Para executar, basta fazer o download do *automato.py* e executar o seguinte com
 
 ## Conclusão
 
-Um dificuldade encontrada foi o tratamento do 'espaço', desta forma, ao digitar a expressão, a mesma precisa ter um 'espaço' após cada símbolo ou a mesma será identificada de acordo com o primeiro símbolo da expressão.
+Um dificuldade encontrada foi o tratamento do 'espaço', desta forma, ao digitar a expressão, a mesma NÂO pode ter um 'espaço' após cada símbolo ou ocorrerá um erro de execução.
+```
+Exemplo: a + b
+```
+
+```
+Saída: ERROR!
+```
+Portanto, para que seja feita a identificação correta dos tokens, a entrada deve ser: `a+b`
+
+Outro problema (ainda tentando solucionar), o programa parece sair do loop após identificar um token do tipo OPERADOR.
 ```
 Exemplo: a+b
 ```
 
 ```
-Saída: <identificador,a+b>
+Saída: <Identificador, a>
+       <soma, >
+       None
 ```
-Portanto, para que seja feita a identificação correta dos tokens, a entrada deve ser: `a + b`
