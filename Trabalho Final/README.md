@@ -56,3 +56,33 @@
     i = 0
     while i < len(nums): print(nums[i]) i = i + 1
 
+## **Analisador Léxico**
+
+> É feito uma varredura no código-fonte, onde,  caractere a carectere são analisados e produz uma sequência de símbolos (símbolos léxicos ou tokens), estes, podem ser manipulados mais facilmente por um parser (leitor de saída). Esse processo é conhecido como Analisador léxico. 
+  É nessa fase que são reconhecidas as palavras reservadas, constantes, identificadores e outras palavras que pertencem a linguagem de programação.
+
+   Exemplo:
+ 
+    CARACTERE      [a-zA-Z]
+    NUMERO         [0-9]
+    ID             ({CARACTERE}|_)+({CARACTERE}|{NUMERO}|_)*
+
+> Para o exemplo acima, temos a definição de um `CARACTERE`, um `NUMERO` e a partir desses blocos base, podemos criar elementos mais complexos como um identificador, definido pelo token `ID`.
+  O token `ID` diz que um identificador deve ter seu inicio como um `CARACTERE` no mínimo e após isso o `ID` pode conter qualquer número de `CARACTERE` ou `NUMERO`.
+
+## **Analisador Sintático**
+
+> O programa lê a entrada de texto da esquerda para a direita e produz uma derivação mais à direita
+  Neste caso, usamos o `BISON`, que juntamente com o `FLEX` realiza esse processo através do método `Look-Ahead-Left-Right`.
+  O trabalho do `BISON` é realizar a analise de um conjunto de tokens gerados pelo `FLEX` e verificar se sua estrutura gramatical está de acordo com uma determinada **gramática formal**.
+  Essa analise, gera uma estrutura de dados, normalmente uma árvore, que captura a hierarquia implícita dessa entrada.
+
+    1+9*2
+
+    <Integer, 1>
+    <Operador Matematico, +>
+    <Integer, 9>
+    <Operador Matematico, *>
+    <Integer, 2>
+
+    [exp[1][+][factor[9][*][2]
