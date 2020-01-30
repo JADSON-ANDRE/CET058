@@ -40,10 +40,15 @@ void inserir_na_tabela_de_simbolos(RegistroTS);
 	char simbolo[50];
 	struct No* no;
 }
-
+%token RESERVADA
 %token PARENTESES_O
 %token PARENTESES_C
+%token COLCHETES_O
+%token COLCHETES_C
+%token CHAVES_O
+%token CHAVES_C
 %token MOD
+%token INICIO_BLOCO
 %token OP_RELACIONAL
 %token OP_LOGICO
 %token ATRIBUICAO
@@ -59,6 +64,7 @@ void inserir_na_tabela_de_simbolos(RegistroTS);
 %token EOL
 
 %type<no> calc
+%type<no> lin
 %type<no> termo
 %type<no> fator
 %type<no> exp
@@ -66,6 +72,7 @@ void inserir_na_tabela_de_simbolos(RegistroTS);
 %type<no> open
 %type<no> close
 
+%type<simbolo> RESERVADA
 %type<simbolo> ID
 %type<simbolo> INT
 %type<simbolo> FLOAT
@@ -76,10 +83,16 @@ void inserir_na_tabela_de_simbolos(RegistroTS);
 %type<simbolo> SUB
 %type<simbolo> ADD
 %type<simbolo> ATRIBUICAO
+%type<simbolo> EXPONENCIAL
 %type<simbolo> OP_RELACIONAL
 %type<simbolo> OP_LOGICO
+%type<simbolo> INICIO_BLOCO
 %type<simbolo> PARENTESES_O
 %type<simbolo> PARENTESES_C
+%type<simbolo> COLCHETES_O
+%type<simbolo> COLCHETES_C
+%type<simbolo> CHAVES_O
+%type<simbolo> CHAVES_C
 
 %%
 /* Regras de Sintaxe */
@@ -108,6 +121,20 @@ exp: fator
 		No** filhos = alloca_filhos(3);
 		filhos[0] = $1;
 		filhos[1] = $2;
+		filhos[2] = $3;
+		$$ = novo_no("exp", filhos, 3);
+	}
+	| exp lin fator{
+		No** filhos = alloca_filhos(3);
+		filhos[0] = $1;
+		filhos[1] = $2;
+		filhos[2] = $3;
+		$$ = novo_no("exp", filhos, 3);
+	}
+	| exp INICIO_BLOCO fator{
+		No** filhos = alloca_filhos(3);
+		filhos[0] = $1;
+		filhos[1] = novo_no(":", NULL, 0);
 		filhos[2] = $3;
 		$$ = novo_no("exp", filhos, 3);
 	}
@@ -156,18 +183,58 @@ fator: termo
 		filhos[2] = $3;
 		$$ = novo_no("fator", filhos, 3);
 	}
+	| fator EXPONENCIAL termo {                         
+		No** filhos = alloca_filhos(3);
+		filhos[0] = $1;
+		filhos[1] = novo_no("^", NULL, 0);
+		filhos[2] = $3;
+		$$ = novo_no("fator", filhos, 3);
+	}
 ;
+
+lin : RESERVADA {$$ = novo_no($1, NULL, 0); };
 
 operador : OP_RELACIONAL { $$ = novo_no($1, NULL, 0); }
-	| OP_LOGICO { $$ = novo_no($1, NULL, 0); }
+	 | OP_LOGICO { $$ = novo_no($1, NULL, 0); }
 ;
 
-open : PARENTESES_O { $$ = novo_no($1, NULL, 0); };
-close : PARENTESES_C { $$ = novo_no($1, NULL, 0); };
+open : PARENTESES_O { $$ = novo_no($1, NULL, 0); }
+     | COLCHETES_O { $$ = novo_no($1, NULL, 0); }
+     | CHAVES_O { $$ = novo_no($1, NULL, 0); }
+;
 
-termo : INT { $$ = novo_no($1, NULL, 0); }
-	| FLOAT { $$ = novo_no($1, NULL, 0); }
-	| ID { $$ = novo_no($1, NULL, 0); }
+close : PARENTESES_C { $$ = novo_no($1, NULL, 0); }
+      | COLCHETES_C { $$ = novo_no($1, NULL, 0); }
+      | CHAVES_C { $$ = novo_no($1, NULL, 0); }
+;
+
+termo : INT { $$ = novo_no($1, NULL, 0); 
+	     RegistroTS registro;
+             strncpy(registro.token, "ID", 50);
+             strncpy(registro.lexema, $1, 50);
+             registro.tipo = INT;
+             registro.endereco = prox_mem_livre;
+             prox_mem_livre += 4;
+             inserir_na_tabela_de_simbolos(registro);
+	}
+	| FLOAT { $$ = novo_no($1, NULL, 0); 
+	     RegistroTS registro;
+             strncpy(registro.token, "ID", 50);
+             strncpy(registro.lexema, $1, 50);
+             registro.tipo = FLOAT;
+             registro.endereco = prox_mem_livre;
+             prox_mem_livre += 8;
+             inserir_na_tabela_de_simbolos(registro);
+	}
+	| ID { $$ = novo_no($1, NULL, 0);
+	     RegistroTS registro;
+             strncpy(registro.token, "ID", 50);
+             strncpy(registro.lexema, $1, 50);
+             registro.tipo = ID;
+             registro.endereco = prox_mem_livre;
+             prox_mem_livre += 4;
+             inserir_na_tabela_de_simbolos(registro);
+	}
 ;
 
 %%

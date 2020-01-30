@@ -45,22 +45,28 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    PARENTESES_O = 258,
-    PARENTESES_C = 259,
-    MOD = 260,
-    OP_RELACIONAL = 261,
-    OP_LOGICO = 262,
-    ATRIBUICAO = 263,
-    EXPONENCIAL = 264,
-    MUL = 265,
-    DIV = 266,
-    DIV_INT = 267,
-    ADD = 268,
-    SUB = 269,
-    INT = 270,
-    FLOAT = 271,
-    ID = 272,
-    EOL = 273
+    RESERVADA = 258,
+    PARENTESES_O = 259,
+    PARENTESES_C = 260,
+    COLCHETES_O = 261,
+    COLCHETES_C = 262,
+    CHAVES_O = 263,
+    CHAVES_C = 264,
+    MOD = 265,
+    INICIO_BLOCO = 266,
+    OP_RELACIONAL = 267,
+    OP_LOGICO = 268,
+    ATRIBUICAO = 269,
+    EXPONENCIAL = 270,
+    MUL = 271,
+    DIV = 272,
+    DIV_INT = 273,
+    ADD = 274,
+    SUB = 275,
+    INT = 276,
+    FLOAT = 277,
+    ID = 278,
+    EOL = 279
   };
 #endif
 
@@ -75,7 +81,7 @@ union YYSTYPE
 	char simbolo[50];
 	struct No* no;
 
-#line 79 "parser.tab.h" /* yacc.c:1909  */
+#line 85 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

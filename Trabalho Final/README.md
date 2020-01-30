@@ -9,7 +9,7 @@
 
 ### **Tipos de dados**
 
-    1     # int
+    1          # int
     1.2 ou 1.  # float
     'python'   # str
     [1, 2, 3]  # list
@@ -20,7 +20,7 @@
     b, c, d = 2, 3, 4.5 # Variáveis recebem cada uma um dos valores
     e = ["cet058" "compiladores"]
 
-### **Expressões Aritiméticas Básicas**
+### **Expressões Aritméticas Básicas**
 
     X = Y + Z # Soma
     X = Y - Z # Subtração
@@ -67,7 +67,7 @@
     NUMERO         [0-9]
     ID             ({CARACTERE}|_)+({CARACTERE}|{NUMERO}|_)*
 
-> Para o exemplo acima, temos a definição de um `CARACTERE`, um `NUMERO` e a partir desses blocos base, podemos criar elementos mais complexos como um identificador, definido pelo token `ID`.
+> Para o exemplo acima, temos a definição de um `CARACTERE`, um `NUMERO` e a partir desses blocos base, podemos criar elementos mais complexos como um identificador - definido pelo token `ID`.
   O token `ID` diz que um identificador deve ter seu inicio como um `CARACTERE` no mínimo e após isso o `ID` pode conter qualquer número de `CARACTERE` ou `NUMERO`.
 
 ## **Analisador Sintático**
