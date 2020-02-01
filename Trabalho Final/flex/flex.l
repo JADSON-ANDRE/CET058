@@ -1,31 +1,15 @@
+  /*
+   Sequencia de Comandos:
+	flex sample*.lex
+	gcc lex.yy.c -lfl
+	./a.out 
+  */
+
 %{
 	int counter = 0;
-  enum yytokentype {
-    MULT_LINHAS,
-    RESERVADA,
-    ATRIBUICAO,
-    OP_MATEMATICO,
-    OP_RELACIONAL,
-    OP_LOGICO,
-    OP_DOT,
-    STRING,
-    NUMERO,
-    SINAL,
-    INT,
-    FLOAT,
-    TABULACAO,
-    PARENTESES_O,
-    PARENTESES_C,
-    COLCHETES_O,
-    COLCHETES_C,
-    CHAVES_O,
-    CHAVES_C,
-    INICIO_BLOCO,
-    ID
-  };
+
 %}
 
-MULT_LINHAS    \"{3}[\x00-\x7F]*\"{3}
 RESERVADA      "and"|"as"|"assert"|"break"|"class"|"continue"|"del"|"elif"|"else"|"except"|"exec"|"finally"|"for"|"from"|"global"|"if"|"import"|"in"|"is"|"lambda"|"nonlocal"|"not"|"or"|"pass"|"raise"|"return"|"try"|"while"|"with"|"yield"|"True"|"False"|"None"
 TIPO_DADOS     "int"|"float"|"str"|"list"
 ATRIBUICAO     "="
@@ -45,9 +29,9 @@ CHAVES_O       "{"
 CHAVES_C       "}"
 INICIO_BLOCO   ":"
 VIRGULA        ","
-STRING         (\'([^\\\"]|\\.)*\')|(\"([^\\\"]|\\.)*\")
+STRING         \'([^\\\']|\\.)+\'
 ID             ({CARACTERE}|_)+({CARACTERE}|{NUMERO}|_)*
-INT            {SINAL}{NUMERO}+
+INT            {NUMERO}+
 FLOAT          {SINAL}({NUMERO}+\.{NUMERO}*|{NUMERO}*\.{NUMERO}+)
 ELEMENT        {STRING}|{INT}|{FLOAT}|{ID}|{TIPO_DADOS}
 LIST           {COLCHETES_O}{TABULACAO}*(({ELEMENT})({TABULACAO}*{VIRGULA}{TABULACAO}*({ELEMENT}){TABULACAO}*)*)*{COLCHETES_C}
@@ -58,8 +42,8 @@ FUNCAO_C       {ID}{TABULACAO}*{TUPLE}
   /* 
   * Rules 
   */
-{MULT_LINHAS}     {printf("\n<Multiline commentary , %s >", yytext); counter++;}
 {RESERVADA}       {printf("\n<Palavra reservada , %s >", yytext); counter++;}
+{TIPO_DADOS}      {printf("\n<Tipo , %s >", yytext); counter++;}
 {LIST}            {printf("\n<List , %s >", yytext); counter++;}
 {PARENTESES_O}    {printf("\n<Abre parenteses , %s >", yytext); counter++;}
 {PARENTESES_C}    {printf("\n<Fecha parenteses , %s >", yytext); counter++;}
@@ -69,7 +53,8 @@ FUNCAO_C       {ID}{TABULACAO}*{TUPLE}
 {CHAVES_C}        {printf("\n<Fecha chaves , %s >", yytext); counter++;}
 {VIRGULA}         {printf("\n<Virgula , %s >", yytext); counter++;}
 {INICIO_BLOCO}    {printf("\n<Inicio do bloco , %s >", yytext); counter++;}
-{INT}             {printf("\n<Inteiro com sinal , %s >", yytext); counter++;}
+{STRING}          {printf("\n<String , %s >", yytext); counter++;}
+{INT}             {printf("\n<Inteiro , %s >", yytext); counter++;}
 {FLOAT}           {printf("\n<Float , %s >", yytext); counter++;}
 {OP_MATEMATICO}   {printf("\n<Operador matematico , %s >", yytext); counter++;}
 {OP_RELACIONAL}   {printf("\n<Operador relacional , %s >", yytext); counter++;}

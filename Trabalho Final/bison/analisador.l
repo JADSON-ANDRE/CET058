@@ -2,7 +2,7 @@
   #include "parser.tab.h"
 %}
 
-RESERVADA       "as"|"assert"|"break"|"class"|"continue"|"del"|"elif"|"else"|"except"|"exec"|"finally"|"for"|"from"|"global"|"if"|"import"|"in"|"is"|"lambda"|"nonlocal"|"pass"|"raise"|"return"|"try"|"while"|"with"|"yield"|"True"|"False"|"None"
+RESERVADA       "as"|"assert"|"break"|"class"|"continue"|"print"|"del"|"elif"|"else"|"except"|"exec"|"finally"|"for"|"from"|"global"|"if"|"import"|"in"|"is"|"lambda"|"nonlocal"|"pass"|"raise"|"return"|"try"|"while"|"with"|"yield"|"True"|"False"|"None"
 TIPO_DADOS      "int"|"float"|"complex"|"str"|"list"|"tuple"|"dict"
 ATRIBUICAO      "="
 EXPONENCIAL     "^"
@@ -39,13 +39,14 @@ LIST            {COLCHETES_O}{TABULACAO}*(({ELEMENT})({TABULACAO}*{VIRGULA}{TABU
   * Rules 
   */
 
+{RESERVADA}      {strncpy(yylval.simbolo, yytext, 50); return RESERVADA;}
 {PARENTESES_O}      {strncpy(yylval.simbolo, yytext, 50); return PARENTESES_O;}
 {PARENTESES_C}      {strncpy(yylval.simbolo, yytext, 50); return PARENTESES_C;}
 {COLCHETES_O}       {strncpy(yylval.simbolo, yytext, 50); return COLCHETES_O;}
 {COLCHETES_C}       {strncpy(yylval.simbolo, yytext, 50); return COLCHETES_C;}
 {CHAVES_O}          {strncpy(yylval.simbolo, yytext, 50); return CHAVES_O;}
 {CHAVES_C}          {strncpy(yylval.simbolo, yytext, 50); return CHAVES_C;}
-{INICIO_BLOCO}          {strncpy(yylval.simbolo, yytext, 50); return INICIO_BLOCO;}
+{INICIO_BLOCO}      {strncpy(yylval.simbolo, yytext, 50); return INICIO_BLOCO;}
 {MOD}               {strncpy(yylval.simbolo, yytext, 50); return MOD;}
 {OP_RELACIONAL}     {strncpy(yylval.simbolo, yytext, 50); return OP_RELACIONAL;}
 {OP_LOGICO}         {strncpy(yylval.simbolo, yytext, 50); return OP_LOGICO;}

@@ -1,4 +1,0 @@
-Command Sequence:
-    flex sample*.lex
-    gcc lex.yy.c -lfl
-    ./a.out 
